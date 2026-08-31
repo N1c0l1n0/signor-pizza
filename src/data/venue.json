@@ -1,0 +1,39 @@
+{
+  "groups": [
+    {
+      "label": "Accessibilità",
+      "items": [
+        "Ingresso accessibile",
+        "Bagno accessibile",
+        "Parcheggio accessibile",
+        "Tavoli accessibili"
+      ]
+    },
+    {
+      "label": "Servizio",
+      "items": [
+        "Consumazione sul posto",
+        "Asporto",
+        "Consegna a domicilio",
+        "Consegna senza contatto"
+      ]
+    },
+    {
+      "label": "Ambiente",
+      "items": ["Casual", "Tranquillo", "Adatto alle famiglie", "LGBTQ+ friendly"]
+    },
+    {
+      "label": "Servizi",
+      "items": ["Wi-Fi gratuito", "Bar", "Bagni gender-neutral", "Seggioloni"]
+    },
+    {
+      "label": "Pagamenti",
+      "items": ["Carte di credito", "Carte di debito", "Pagamenti NFC"]
+    },
+    {
+      "label": "Parcheggio",
+      "items": ["Parcheggio gratuito", "Parcheggio in strada gratuito"]
+    }
+  ],
+  "highlights": ["Ottimi dessert", "Ottimo caffè", "Prenotazione cena consigliata"]
+}

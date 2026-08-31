@@ -1,0 +1,111 @@
+---
+import { formatPrice } from '../utils/format';
+import { getPizzaImage, getWineBeerPairing } from '../utils/pizzaImages';
+import type { MenuItem } from '../types/content';
+
+interface Props {
+  item: MenuItem;
+  categoryName?: string;
+  viewMode?: 'grid' | 'list';
+}
+
+const { item, categoryName = 'Pizza', viewMode = 'grid' } = Astro.props;
+const imageUrl = getPizzaImage(item.image, item.name);
+const pairing = getWineBeerPairing(item.name);
+const serializedData = JSON.stringify({
+  name: item.name,
+  description: item.description,
+  price: item.price,
+  image: imageUrl,
+  category: categoryName,
+  region: item.region,
+  tags: item.tags,
+  featured: item.featured,
+  pairingBev: pairing.beverage,
+  pairingNote: pairing.note,
+});
+---
+
+<article
+  class="pizza-card group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-white p-5 sm:p-6 shadow-sm border border-crema-forno/80 transition-all duration-300 hover:shadow-xl hover:border-basilico/30 hover:-translate-y-1 cursor-pointer"
+  data-name={item.name.toLowerCase()}
+  data-description={item.description.toLowerCase()}
+  data-category={categoryName.toLowerCase()}
+  data-region={(item.region || '').toLowerCase()}
+  data-tags={JSON.stringify(item.tags || [])}
+  data-featured={item.featured ? 'true' : 'false'}
+  data-pizza-info={serializedData}
+>
+  <!-- Top Section: Image & Badges -->
+  <div class="flex flex-col items-center">
+    <!-- Top-Down Floating Pizza Visual (No border, clean circular food styling with drop shadow) -->
+    <div class="relative mb-4 h-40 w-40 sm:h-44 sm:w-44 flex items-center justify-center">
+      <!-- Soft ambient warmth glow -->
+      <div class="absolute inset-2 rounded-full bg-forno-arancio/10 blur-xl transition-all duration-500 group-hover:scale-125 group-hover:bg-forno-arancio/20"></div>
+      
+      <img
+        src={imageUrl}
+        alt={`Pizza ${item.name} - Signor Pizza`}
+        width="220"
+        height="220"
+        class="relative h-full w-full rounded-full object-cover shadow-lg transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6 select-none pointer-events-none"
+        loading="lazy"
+      />
+
+      <!-- Quick View Badge on Hover -->
+      <div class="absolute inset-0 flex items-center justify-center rounded-full bg-carbone/40 opacity-0 backdrop-blur-[2px] transition duration-300 group-hover:opacity-100">
+        <span class="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-carbone shadow-md backdrop-blur-sm">
+          Scopri 🔍
+        </span>
+      </div>
+    </div>
+
+    <!-- Tags / Badges -->
+    <div class="flex flex-wrap justify-center gap-1.5 mb-2">
+      {item.featured && (
+        <span class="rounded-full bg-basilico/10 px-2.5 py-0.5 text-[11px] font-bold text-basilico">
+          ★ Consigliato
+        </span>
+      )}
+      {item.region && (
+        <span class="rounded-full bg-carbone/5 px-2.5 py-0.5 text-[11px] font-medium text-carbone/80">
+          {item.region}
+        </span>
+      )}
+      {item.tags?.map((tag) => (
+        <span class="rounded-full bg-pomodoro/10 px-2 py-0.5 text-[11px] font-semibold text-pomodoro">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <!-- Title & Description -->
+    <h3 class="text-center font-display text-xl font-bold text-carbone transition-colors group-hover:text-pomodoro">
+      {item.name}
+    </h3>
+    <p class="mt-2 text-center text-xs leading-relaxed text-grigio-caldo line-clamp-2">
+      {item.description}
+    </p>
+  </div>
+
+  <!-- Bottom Section: Price & CTA Action -->
+  <div class="mt-5 flex items-center justify-between border-t border-crema-forno/60 pt-3">
+    <div class="flex flex-col">
+      <span class="text-[10px] uppercase tracking-wider text-grigio-caldo">Prezzo</span>
+      <span class="font-display text-lg font-bold tabular-nums text-pomodoro">
+        {formatPrice(item.price)}
+      </span>
+    </div>
+
+    <button
+      type="button"
+      class="inline-flex items-center gap-1 rounded-xl bg-crema-forno px-3 py-1.5 text-xs font-semibold text-carbone transition hover:bg-pomodoro hover:text-white"
+      aria-label={`Dettagli pizza ${item.name}`}
+    >
+      <span>Dettagli</span>
+      <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+</article>

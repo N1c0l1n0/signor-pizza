@@ -1,0 +1,50 @@
+---
+import site from '../data/site.json';
+import { telHref } from '../utils/format';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-crema-forno bg-carbone text-white">
+  <div class="mx-auto max-w-6xl section-padding !py-12">
+    <div class="grid gap-10 md:grid-cols-3">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="/images/logo.svg" alt="Signor Pizza" width="36" height="44" class="h-10 w-auto object-contain" />
+          <div>
+            <p class="font-display text-lg font-semibold">{site.name}</p>
+            <p class="text-sm text-white/70">{site.tagline}</p>
+          </div>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-white/70">{site.address.full}</p>
+      </div>
+
+      <div>
+        <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-white/50">Collegamenti</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/#chi-siamo" class="text-white/80 hover:text-white">Chi siamo</a></li>
+          <li><a href="/menu" class="text-white/80 hover:text-white">Menu</a></li>
+          <li><a href="/#galleria" class="text-white/80 hover:text-white">Galleria</a></li>
+          <li><a href="/#contatti" class="text-white/80 hover:text-white">Contatti</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-white/50">Contatti</p>
+        <ul class="space-y-2 text-sm text-white/80">
+          <li><a href={telHref(site.phone)} class="hover:text-white">{site.phoneDisplay}</a></li>
+          <li><a href={`mailto:${site.email}`} class="hover:text-white">{site.email}</a></li>
+          <li class="flex gap-4 pt-2">
+            <a href={site.social.instagram} class="hover:text-white" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href={site.social.facebook} class="hover:text-white" target="_blank" rel="noopener noreferrer">Facebook</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
+      <p>© {year} {site.name}. Tutti i diritti riservati.</p>
+      <p>Locale accessibile in sedia a rotelle · Certificati AIC</p>
+    </div>
+  </div>
+</footer>

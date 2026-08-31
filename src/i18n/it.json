@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "about": "Chi siamo",
+    "awards": "Riconoscimenti",
+    "featured": "In evidenza",
+    "services": "Servizi",
+    "venue": "Il locale",
+    "gallery": "Galleria",
+    "contact": "Contatti",
+    "menu": "Menu"
+  },
+  "cta": {
+    "call": "Chiama",
+    "book": "Prenota",
+    "menu": "Menu",
+    "directions": "Indicazioni",
+    "whatsapp": "WhatsApp",
+    "fullMenu": "Vedi menu completo"
+  },
+  "badges": {
+    "featured": "Consigliato",
+    "glutenFree": "AIC Gluten free"
+  },
+  "footer": {
+    "rights": "Tutti i diritti riservati.",
+    "accessibility": "Locale accessibile in sedia a rotelle."
+  }
+}

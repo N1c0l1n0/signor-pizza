@@ -1,0 +1,136 @@
+---
+import site from '../data/site.json';
+import { telHref } from '../utils/format';
+
+const navItems = [
+  { href: '/#chi-siamo', label: 'Chi siamo' },
+  { href: '/#riconoscimenti', label: 'Riconoscimenti' },
+  { href: '/#in-evidenza', label: 'In evidenza' },
+  { href: '/#galleria', label: 'Galleria' },
+  { href: '/#contatti', label: 'Contatti' },
+];
+
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/';
+---
+
+<header
+  id="site-header"
+  class:list={[
+    'fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter,color] duration-300',
+    isHome
+      ? 'header-over-hero border-transparent bg-transparent'
+      : 'border-crema-forno/80 bg-bianco-caldo/90 backdrop-blur-md',
+  ]}
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+    <a href="/" class="flex items-center gap-3" aria-label={`${site.name} — Home`}>
+      <img src="/images/logo.svg" alt="Signor Pizza" width="40" height="48" class="h-11 w-auto object-contain drop-shadow-sm transition-transform duration-200 hover:scale-105" />
+      <div class="hidden sm:block">
+        <p class="brand-title font-display text-lg font-semibold leading-tight text-carbone">{site.name}</p>
+        <p class="brand-tag text-xs font-medium uppercase tracking-wider text-basilico">{site.tagline}</p>
+      </div>
+    </a>
+
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="Navigazione principale">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="nav-link text-sm font-medium text-grigio-caldo transition hover:text-pomodoro"
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href="/menu"
+        class:list={[
+          'menu-link text-sm font-semibold transition hover:text-pomodoro',
+          currentPath === '/menu' ? 'text-pomodoro' : 'text-carbone',
+        ]}
+      >
+        Menu
+      </a>
+    </nav>
+
+    <div class="hidden items-center gap-3 lg:flex">
+      <a href={telHref(site.phone)} class="btn-phone btn-secondary text-sm">{site.phoneDisplay}</a>
+      <a href={site.bookingUrl} class="btn-primary text-sm" target="_blank" rel="noopener noreferrer">
+        Prenota
+      </a>
+    </div>
+
+    <button
+      type="button"
+      id="menu-toggle"
+      class="menu-toggle inline-flex h-10 w-10 items-center justify-center rounded-lg border border-crema-forno text-carbone lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Apri menu di navigazione"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav
+    id="mobile-nav"
+    class="hidden border-t border-crema-forno bg-bianco-caldo px-4 py-4 lg:hidden"
+    aria-label="Navigazione mobile"
+  >
+    <ul class="flex flex-col gap-2">
+      {navItems.map((item) => (
+        <li>
+          <a href={item.href} class="block rounded-lg px-3 py-2 text-sm font-medium text-carbone hover:bg-crema-forno">
+            {item.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a href="/menu" class="block rounded-lg px-3 py-2 text-sm font-semibold text-pomodoro hover:bg-crema-forno">
+          Menu
+        </a>
+      </li>
+      <li class="pt-2">
+        <a href={site.bookingUrl} class="btn-primary w-full text-sm" target="_blank" rel="noopener noreferrer">
+          Prenota un tavolo
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('mobile-nav');
+  const overHero = header?.classList.contains('header-over-hero');
+
+  const syncHeader = (navOpen = false) => {
+    if (!header || !overHero) return;
+    header.classList.toggle('is-scrolled', navOpen || window.scrollY > 24);
+  };
+
+  syncHeader();
+  window.addEventListener(
+    'scroll',
+    () => syncHeader(Boolean(nav && !nav.classList.contains('hidden'))),
+    { passive: true }
+  );
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Chiudi menu di navigazione' : 'Apri menu di navigazione');
+    syncHeader(isOpen);
+  });
+
+  nav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.add('hidden');
+      toggle?.setAttribute('aria-expanded', 'false');
+      toggle?.setAttribute('aria-label', 'Apri menu di navigazione');
+      syncHeader(false);
+    });
+  });
+</script>

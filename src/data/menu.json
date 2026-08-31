@@ -1,0 +1,255 @@
+{
+  "categories": [
+    {
+      "id": "tradizionali",
+      "name": "Tradizionali",
+      "items": [
+        {
+          "name": "Marinara",
+          "description": "Doppio pomodoro S. Marzano, olio agliato, origano, basilico",
+          "price": 5,
+          "image": "marinara",
+          "tags": ["Classica", "Vegana"]
+        },
+        {
+          "name": "Margherita",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, olio EVO, basilico",
+          "price": 6,
+          "featured": true,
+          "image": "margherita",
+          "tags": ["Iconica", "Vegetariana", "Best Seller"]
+        },
+        {
+          "name": "Napoli",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, filetti di acciuga, basilico",
+          "price": 7,
+          "image": "napoli",
+          "tags": ["Sapori di Mare"]
+        },
+        {
+          "name": "Bufalina",
+          "description": "Pomodoro S. Marzano, mozzarella di bufala campana D.O.P., olio EVO, basilico",
+          "price": 8,
+          "featured": true,
+          "image": "bufalina",
+          "tags": ["D.O.P.", "Vegetariana", "Consigliata"]
+        },
+        {
+          "name": "Tonno e cipolle",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, tonno, cipolla rossa di Tropea, basilico",
+          "price": 8,
+          "image": "tonno-e-cipolle",
+          "tags": ["Tropea IGP"]
+        },
+        {
+          "name": "Contadina",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, melanzane, friggitelli, zucchine, olio EVO, olive Gaeta, basilico",
+          "price": 9,
+          "image": "contadina",
+          "tags": ["Ortaggi Freschi", "Vegetariana"]
+        },
+        {
+          "name": "Filante",
+          "description": "Mozzarella fior di latte, zola mascarpone, provola affumicata, grana padano D.O.P., basilico",
+          "price": 8.5,
+          "image": "filante",
+          "tags": ["4 Formaggi", "Vegetariana"]
+        },
+        {
+          "name": "Salsiccia e friarielli",
+          "description": "Mozzarella fior di latte, salsiccia, friarielli, olio EVO, basilico",
+          "price": 9,
+          "image": "salsiccia-e-friarielli",
+          "tags": ["Tradizione Napoletana"]
+        },
+        {
+          "name": "Norma",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, melanzane soffritte, pomodorini, ricotta salata, basilico",
+          "price": 10,
+          "featured": true,
+          "image": "norma",
+          "tags": ["Siciliana", "Vegetariana"]
+        },
+        {
+          "name": "Calzone semplice",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, prosciutto cotto",
+          "price": 7,
+          "image": "calzone-semplice",
+          "tags": ["Calzone al Forno"]
+        },
+        {
+          "name": "Calzone gustoso",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, prosciutto cotto, provola affumicata, funghi",
+          "price": 9,
+          "image": "calzone-gustoso",
+          "tags": ["Calzone Ripieno"]
+        }
+      ]
+    },
+    {
+      "id": "regionali",
+      "name": "Regionali",
+      "items": [
+        {
+          "name": "Valle d'Aosta",
+          "description": "Mozzarella fior di latte, toma della Valle d'Aosta, lardo di Arnad D.O.P., gocce di miele, pepe nero",
+          "price": 10,
+          "image": "valle-daosta",
+          "region": "Valle d'Aosta"
+        },
+        {
+          "name": "Piemonte",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, bresaola punta d'anca I.G.P., funghi, rucola",
+          "price": 11,
+          "image": "piemonte",
+          "region": "Piemonte"
+        },
+        {
+          "name": "Trentino Alto Adige",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, speck alto adige, funghi pioppino, tonno",
+          "price": 11,
+          "image": "trentino-alto-adige",
+          "region": "Trentino-Alto Adige"
+        },
+        {
+          "name": "Friuli Venezia Giulia",
+          "description": "Mozzarella fior di latte, taleggio D.O.P., pere, noci, miele di cipolla",
+          "price": 10,
+          "image": "friuli-venezia-giulia",
+          "region": "Friuli Venezia Giulia"
+        },
+        {
+          "name": "Veneto",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, soppressa veneta, asiago D.O.P., patate, basilico",
+          "price": 10,
+          "image": "veneto",
+          "region": "Veneto"
+        },
+        {
+          "name": "Lombardia",
+          "description": "Mozzarella fior di latte, zafferano, radicchio, zola, mascarpone",
+          "price": 10,
+          "image": "lombardia",
+          "region": "Lombardia"
+        },
+        {
+          "name": "Liguria",
+          "description": "Base pesto alla genovese, mozzarella fior di latte, gamberetti (surgelati), pomodorini datterino, pinoli",
+          "price": 10,
+          "image": "liguria",
+          "region": "Liguria"
+        },
+        {
+          "name": "Emilia Romagna",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, prosciutto crudo di Parma, glassa di aceto balsamico di Modena, parmigiano reggiano D.O.P. a scaglie, basilico",
+          "price": 10,
+          "image": "emilia-romagna",
+          "region": "Emilia-Romagna"
+        },
+        {
+          "name": "Toscana",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, capocollo toscano, pecorino di Manciano D.O.P., pomodorini gialli, olio EVO, basilico",
+          "price": 10,
+          "image": "toscana",
+          "region": "Toscana"
+        },
+        {
+          "name": "Marche",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, provola affumicata, pancetta al pepe nero, olio tartufato, basilico",
+          "price": 10,
+          "image": "marche",
+          "region": "Marche"
+        },
+        {
+          "name": "Abruzzo",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, morscella, granella di pistacchio, ricotta fresca",
+          "price": 10,
+          "image": "abruzzo",
+          "region": "Abruzzo"
+        },
+        {
+          "name": "Umbria",
+          "description": "Mozzarella fior di latte, porchetta, patate, olio EVO",
+          "price": 10,
+          "image": "umbria",
+          "region": "Umbria"
+        },
+        {
+          "name": "Lazio",
+          "description": "Crema all'uovo, mozzarella fior di latte, guanciale, pecorino romano D.O.P., pepe, basilico",
+          "price": 10,
+          "image": "lazio",
+          "region": "Lazio",
+          "tags": ["Carbonara Style", "Specialità"]
+        },
+        {
+          "name": "Molise",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, prosciutto cotto, melanzane, caciocavallo, olio EVO, basilico",
+          "price": 10,
+          "image": "molise",
+          "region": "Molise"
+        },
+        {
+          "name": "Campania",
+          "description": "Pomodoro S. Marzano, mozzarella di bufala campana D.O.P., filetti di acciuga, pomodorini gialli, pomodorini datterino, olio EVO, basilico",
+          "price": 10,
+          "image": "campania",
+          "region": "Campania"
+        },
+        {
+          "name": "Puglia",
+          "description": "Pomodoro S. Marzano, burrata pugliese, pomodori secchi, patè di olive, rucola, taralli sbriciolati",
+          "price": 10,
+          "image": "puglia",
+          "region": "Puglia",
+          "tags": ["Burrata Pugliese", "Consigliata"]
+        },
+        {
+          "name": "Basilicata",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, salsiccia, friarielli",
+          "price": 9.5,
+          "image": "basilicata",
+          "region": "Basilicata"
+        },
+        {
+          "name": "Calabria",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, cipolla di Tropea, 'nduja, spianata calabra, olio EVO, basilico",
+          "price": 10,
+          "image": "calabria",
+          "region": "Calabria",
+          "tags": ["Piccante", "'Nduja"]
+        },
+        {
+          "name": "Sicilia",
+          "description": "Crema di pistacchi di Bronte, mozzarella fior di latte, pomodorini gialli, ricotta salata, granella di pistacchio",
+          "price": 10,
+          "featured": true,
+          "image": "sicilia",
+          "region": "Sicilia",
+          "tags": ["Pistacchio di Bronte", "Vegetariana"]
+        },
+        {
+          "name": "Sardegna",
+          "description": "Crema di carciofi, mozzarella fior di latte, ricotta sarda, pancetta pepiata",
+          "price": 10,
+          "image": "sardegna",
+          "region": "Sardegna"
+        }
+      ]
+    },
+    {
+      "id": "speciale",
+      "name": "Speciale",
+      "items": [
+        {
+          "name": "Signorpizza",
+          "description": "Base pesto alla genovese, mozzarella fior di latte, burrata fresca intera, prosciutto crudo, datterino rosso, basilico",
+          "price": 12,
+          "featured": true,
+          "image": "signor-pizza",
+          "tags": ["Firma dello Chef", "Burrata & Crudo", "Must Try"]
+        }
+      ]
+    }
+  ]
+}

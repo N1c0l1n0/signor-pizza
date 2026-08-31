@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  --color-pomodoro: #c0392b;
+  --color-pomodoro-dark: #96281b;
+  --color-basilico: #2d6a4f;
+  --color-basilico-light: #40916c;
+  --color-bianco-caldo: #fffbf5;
+  --color-crema-forno: #f5ede0;
+  --color-carbone: #1a1a1a;
+  --color-grigio-caldo: #6b6560;
+  --color-forno-arancio: #d35400;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-bianco-caldo text-carbone font-body antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-basilico;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-pomodoro px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-pomodoro-dark;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 border-basilico px-5 py-2.5 text-sm font-semibold text-basilico transition hover:bg-basilico hover:text-white;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-white ring-1 ring-white/40 transition hover:bg-white/10;
+  }
+
+  .section-padding {
+    @apply px-4 py-16 sm:px-6 lg:px-8 lg:py-24;
+  }
+
+  .section-alt {
+    @apply bg-crema-forno;
+  }
+
+  .display-title {
+    @apply font-display text-3xl font-semibold tracking-tight text-carbone sm:text-4xl lg:text-5xl;
+  }
+
+  .section-label {
+    @apply mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-basilico;
+  }
+
+  .reveal {
+    @apply translate-y-4 opacity-0 transition duration-700 ease-out;
+  }
+
+  .reveal.is-visible {
+    @apply translate-y-0 opacity-100;
+  }
+}
+
+/* Unlayered so these beat Tailwind utilities on the same elements */
+.header-over-hero:not(.is-scrolled) .brand-title {
+  color: #fffbf5;
+}
+
+.header-over-hero:not(.is-scrolled) .brand-tag {
+  color: rgb(255 251 245 / 0.7);
+}
+
+.header-over-hero:not(.is-scrolled) .nav-link {
+  color: rgb(255 251 245 / 0.82);
+}
+
+.header-over-hero:not(.is-scrolled) .nav-link:hover,
+.header-over-hero:not(.is-scrolled) .menu-link {
+  color: #fffbf5;
+}
+
+.header-over-hero:not(.is-scrolled) .btn-phone {
+  border-color: rgb(255 251 245 / 0.8);
+  color: #fffbf5;
+}
+
+.header-over-hero:not(.is-scrolled) .btn-phone:hover {
+  background-color: #fffbf5;
+  color: #1a1a1a;
+}
+
+.header-over-hero:not(.is-scrolled) .menu-toggle {
+  border-color: rgb(255 251 245 / 0.35);
+  color: #fffbf5;
+}
+
+.header-over-hero.is-scrolled {
+  border-bottom-color: rgb(245 237 224 / 0.8);
+  background-color: rgb(255 251 245 / 0.92);
+  backdrop-filter: blur(12px);
+}

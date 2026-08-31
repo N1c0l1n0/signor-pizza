@@ -1,0 +1,97 @@
+---
+import site from '../data/site.json';
+import hours from '../data/hours.json';
+import { telHref, whatsappHref } from '../utils/format';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section id="contatti" class="section-padding">
+  <div class="mx-auto max-w-6xl">
+    <div class="reveal mb-12">
+      <SectionHeading
+        label="Contatti"
+        title="Orari e come raggiungerci"
+        description="Martedì chiuso. Domenica servizio cena."
+      />
+    </div>
+
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div class="reveal space-y-8">
+        <div>
+          <h3 class="font-display text-xl font-semibold text-carbone">Orari di apertura</h3>
+          <ul class="mt-4 divide-y divide-crema-forno rounded-2xl border border-crema-forno bg-crema-forno/40">
+            {hours.schedule.map((entry) => (
+              <li class="flex items-start justify-between gap-4 px-5 py-3 text-sm">
+                <span class="font-semibold text-carbone">{entry.day}</span>
+                <span class="text-right text-grigio-caldo">
+                  {entry.closed ? (
+                    <span class="font-medium text-pomodoro">Chiuso</span>
+                  ) : (
+                    <>
+                      {entry.slots?.join(' · ')}
+                      {entry.note && <span class="mt-0.5 block text-xs text-basilico">{entry.note}</span>}
+                    </>
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-display text-xl font-semibold text-carbone">Contatti</h3>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li>
+              <span class="font-semibold text-carbone">Indirizzo</span>
+              <p class="text-grigio-caldo">{site.address.full}</p>
+            </li>
+            <li>
+              <span class="font-semibold text-carbone">Telefono</span>
+              <p><a href={telHref(site.phone)} class="text-pomodoro hover:underline">{site.phoneDisplay}</a></p>
+            </li>
+            <li>
+              <span class="font-semibold text-carbone">Email</span>
+              <p><a href={`mailto:${site.email}`} class="text-pomodoro hover:underline">{site.email}</a></p>
+            </li>
+          </ul>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href={site.bookingUrl}
+              class="btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Prenota su TheFork
+            </a>
+            <a href={telHref(site.phone)} class="btn-secondary">Chiama</a>
+            <a
+              href={whatsappHref(site.whatsapp, 'Ciao, vorrei informazioni su prenotazione e menu.')}
+              class="btn-secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
+            </a>
+            <a href={site.googleMapsUrl} class="btn-secondary" target="_blank" rel="noopener noreferrer">
+              Indicazioni
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal overflow-hidden rounded-2xl border border-crema-forno shadow-sm">
+        <iframe
+          title="Mappa — Pizzeria Signor Pizza"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2782.5!2d8.852!3d45.612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786899a0f0f0f0f%3A0x0!2sVia%20Quintino%20Sella%2019%2C%2021052%20Busto%20Arsizio%20VA!5e0!3m2!1sit!2sit!4v1690000000000!5m2!1sit!2sit"
+          width="100%"
+          height="420"
+          style="border:0;"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>

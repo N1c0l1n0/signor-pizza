@@ -1,0 +1,38 @@
+---
+import venue from '../data/venue.json';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section id="il-locale" class="section-padding">
+  <div class="mx-auto max-w-6xl">
+    <div class="reveal mb-12">
+      <SectionHeading
+        label="Il locale"
+        title="Un posto per tutti"
+        description="Ambiente tranquillo e informale, pensato per famiglie, coppie e chi mangia da solo."
+      />
+    </div>
+
+    <div class="reveal mb-8 flex flex-wrap gap-2">
+      {venue.highlights.map((item) => (
+        <span class="rounded-full bg-pomodoro/10 px-4 py-1.5 text-sm font-semibold text-pomodoro">{item}</span>
+      ))}
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {venue.groups.map((group) => (
+        <article class="reveal rounded-2xl border border-crema-forno bg-crema-forno/50 p-5">
+          <h3 class="mb-3 font-display text-lg font-semibold text-carbone">{group.label}</h3>
+          <ul class="space-y-2">
+            {group.items.map((item) => (
+              <li class="flex items-start gap-2 text-sm text-grigio-caldo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mt-0.5 shrink-0 text-basilico" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

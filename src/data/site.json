@@ -1,0 +1,53 @@
+{
+  "name": "Pizzeria Signor Pizza",
+  "tagline": "Pizzeria Gourmet",
+  "description": "Pizzeria gourmet a Busto Arsizio. Vincitori del Premio Le 5 Stagioni 2024, certificati AIC per alimenti gluten free. Impasto a lunga lievitazione e ingredienti selezionati.",
+  "phone": "+390331234567",
+  "phoneDisplay": "+39 0331 234567",
+  "email": "info@signorpizza.it",
+  "whatsapp": "390331234567",
+  "address": {
+    "street": "Via Quintino Sella 19",
+    "city": "Busto Arsizio",
+    "zip": "21052",
+    "country": "IT",
+    "full": "Via Quintino Sella 19, 21052 Busto Arsizio (VA)"
+  },
+  "social": {
+    "instagram": "https://instagram.com/signorpizza",
+    "facebook": "https://facebook.com/signorpizza"
+  },
+  "bookingUrl": "https://www.thefork.it/ristorante/signor-pizza-r695341?cc=18174-54f",
+  "googleMapsUrl": "https://maps.google.com/?q=Via+Quintino+Sella+19,+Busto+Arsizio",
+  "googleMapsEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2782.0!2d8.85!3d45.61!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVia%20Quintino%20Sella%2019%2C%20Busto%20Arsizio!5e0!3m2!1sit!2sit!4v1",
+  "awards": [
+    {
+      "title": "Vincitore Premio Le 5 Stagioni",
+      "year": "2024",
+      "description": "Riconoscimento nazionale per l'eccellenza della pizza gourmet.",
+      "icon": "trophy"
+    },
+    {
+      "title": "Nazionale pizzaioli",
+      "description": "Partecipazione con la selezione italiana dei maestri pizzaioli.",
+      "icon": "flag"
+    },
+    {
+      "title": "Certificati AIC",
+      "description": "Alimenti gluten free certificati per celiaci.",
+      "icon": "shield"
+    }
+  ],
+  "about": {
+    "lead": "Impasto lievitato 48 ore, farine selezionate e forno che racconta la tradizione napoletana con occhio gourmet.",
+    "paragraphs": [
+      "Signor Pizza nasce dalla passione per la pizza verace: croccante fuori, morbida dentro, con ingredienti di prima scelta e un impasto che riposa il tempo giusto.",
+      "Ogni sera il forno si accende per chi cerca un'esperienza autentica — pranzo veloce, cena con amici o una pizza gourmet da assaporare con calma."
+    ],
+    "values": [
+      { "title": "Lievitazione naturale", "text": "Impasto a 48 ore per digestibilità e profumo." },
+      { "title": "Ingredienti selezionati", "text": "Dalla farina Le 5 Stagioni al pomodoro San Marzano." },
+      { "title": "Celiachia accolta", "text": "Opzioni certificati AIC, preparate con cura dedicata." }
+    ]
+  }
+}

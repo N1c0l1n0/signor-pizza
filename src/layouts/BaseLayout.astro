@@ -1,0 +1,136 @@
+---
+import site from '../data/site.json';
+import hours from '../data/hours.json';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = `${site.name} | ${site.tagline} a Busto Arsizio`,
+  description = site.description,
+  ogImage = '/images/logo.svg',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://signorpizza.it');
+
+const openingHoursSpecification = hours.schedule
+  .filter((entry) => !entry.closed && entry.slots)
+  .flatMap((entry) => {
+    const dayMap: Record<string, string> = {
+      Lunedì: 'Monday',
+      Mercoledì: 'Wednesday',
+      Giovedì: 'Thursday',
+      Venerdì: 'Friday',
+      Sabato: 'Saturday',
+      Domenica: 'Sunday',
+    };
+    const day = dayMap[entry.day];
+    if (!day || !entry.slots) return [];
+    return entry.slots.map((slot) => {
+      const [opens, closes] = slot.split('–');
+      return {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: day,
+        opens,
+        closes,
+      };
+    });
+  });
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: site.name,
+  description: site.description,
+  image: ogImage,
+  telephone: site.phone,
+  email: site.email,
+  servesCuisine: 'Pizza italiana',
+  priceRange: '€€',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    postalCode: site.address.zip,
+    addressCountry: site.address.country,
+  },
+  openingHoursSpecification,
+  url: canonical.href,
+};
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
+    <link rel="canonical" href={canonical.href} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:locale" content="it_IT" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600;1,9..144,700&display=swap" rel="stylesheet" />
+
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-basilico focus:px-4 focus:py-2 focus:text-white">
+      Vai al contenuto
+    </a>
+    <slot name="header" />
+    <main id="main-content">
+      <slot />
+    </main>
+    <slot name="footer" />
+    <slot name="sticky" />
+    <script>
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const elements = document.querySelectorAll('.reveal');
+
+      if (prefersReducedMotion) {
+        elements.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        elements.forEach((el) => observer.observe(el));
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>

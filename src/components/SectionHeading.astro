@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  label?: string;
+  align?: 'left' | 'center';
+}
+
+const { title, description, label, align = 'left' } = Astro.props;
+const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
+---
+
+<div class={`max-w-2xl ${alignClass}`}>
+  {label && <p class="section-label">{label}</p>}
+  <h2 class="display-title">{title}</h2>
+  {description && (
+    <p class="mt-4 text-base leading-relaxed text-grigio-caldo sm:text-lg">{description}</p>
+  )}
+</div>

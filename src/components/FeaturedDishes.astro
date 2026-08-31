@@ -1,0 +1,66 @@
+---
+import menu from '../data/menu.json';
+import { formatPrice } from '../utils/format';
+import { getPizzaImage } from '../utils/pizzaImages';
+import SectionHeading from './SectionHeading.astro';
+import type { MenuItem } from '../types/content';
+
+const featured = menu.categories.flatMap((cat) =>
+  cat.items.filter((item) => item.featured).map((item) => ({ ...item, category: cat.name }))
+).slice(0, 4) as (MenuItem & { category: string })[];
+---
+
+<section id="in-evidenza" class="section-padding bg-crema-forno/40">
+  <div class="mx-auto max-w-6xl">
+    <div class="reveal mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <SectionHeading
+        label="In evidenza"
+        title="Le nostre creazioni iconiche"
+        description="Pizze d'autore con ingredienti d'eccellenza e impasto a lunga maturazione. Disponibili varianti AIC Gluten Free."
+      />
+      <a href="/menu" class="btn-primary shrink-0 self-start sm:self-auto shadow-md">
+        Esplora il menu completo 
+      </a>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {featured.map((item) => {
+        const imgUrl = getPizzaImage(item.image, item.name);
+        return (
+          <a
+            href="/menu"
+            class="reveal group flex flex-col justify-between overflow-hidden rounded-3xl bg-white p-6 shadow-sm border border-crema-forno transition-all duration-300 hover:shadow-xl hover:border-pomodoro/30 hover:-translate-y-1"
+          >
+            <div>
+              <!-- Top-down circular floating photo -->
+              <div class="relative mx-auto mb-4 h-40 w-40 flex items-center justify-center">
+                <div class="absolute inset-2 rounded-full bg-forno-arancio/15 blur-xl transition-all duration-500 group-hover:scale-125 group-hover:bg-forno-arancio/25"></div>
+                <img
+                  src={imgUrl}
+                  alt={`Pizza ${item.name}`}
+                  width="200"
+                  height="200"
+                  class="relative h-full w-full rounded-full object-cover shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
+                  loading="lazy"
+                />
+              </div>
+
+              <span class="text-[11px] font-bold uppercase tracking-wider text-basilico">{item.category}</span>
+              <h3 class="mt-1 font-display text-lg font-bold text-carbone group-hover:text-pomodoro transition-colors">
+                {item.name}
+              </h3>
+              <p class="mt-2 line-clamp-2 text-xs leading-relaxed text-grigio-caldo">{item.description}</p>
+            </div>
+
+            <div class="mt-5 flex items-center justify-between border-t border-crema-forno/60 pt-3">
+              <span class="font-display text-lg font-bold text-pomodoro">{formatPrice(item.price)}</span>
+              <span class="inline-flex items-center gap-1 text-xs font-semibold text-basilico group-hover:translate-x-0.5 transition-transform">
+                Scopri →
+              </span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>

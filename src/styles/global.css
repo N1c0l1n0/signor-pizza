@@ -102,7 +102,7 @@
 
   /* Sticky category tabs: active green + white text must not revert on hover */
   .menu-tab {
-    @apply shrink-0 rounded-full border border-crema-forno bg-transparent px-4 py-1.5 text-sm font-semibold text-grigio-caldo transition;
+    @apply shrink-0 rounded-full border border-crema-forno bg-transparent px-3 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-semibold text-grigio-caldo transition touch-manipulation;
   }
 
   .menu-tab:hover:not(.is-active) {
@@ -117,6 +117,23 @@
   .menu-tab.is-active:active,
   .menu-tab.is-active:focus {
     @apply border-basilico bg-basilico text-white;
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .touch-manipulation {
+    touch-action: manipulation;
   }
 }
 

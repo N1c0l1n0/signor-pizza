@@ -1,5 +1,4 @@
 ---
-import GlutenFreeBadge from './GlutenFreeBadge.astro';
 import { formatPrice } from '../utils/format';
 import { getPizzaImage, getWineBeerPairing } from '../utils/pizzaImages';
 import type { MenuItem } from '../types/content';
@@ -28,7 +27,7 @@ const serializedData = JSON.stringify({
 ---
 
 <article
-  class="pizza-card group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-white p-5 sm:p-6 shadow-sm border border-crema-forno/80 transition-all duration-300 hover:shadow-xl hover:border-basilico/30 hover:-translate-y-1 cursor-pointer"
+  class="pizza-card group relative flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl bg-white p-4 sm:p-6 shadow-sm border border-crema-forno/80 transition-all duration-300 hover:shadow-xl hover:border-basilico/30 sm:hover:-translate-y-1 cursor-pointer active:scale-[0.98] touch-manipulation"
   data-name={item.name.toLowerCase()}
   data-description={item.description.toLowerCase()}
   data-category={categoryName.toLowerCase()}
@@ -40,7 +39,7 @@ const serializedData = JSON.stringify({
   <!-- Top Section: Image & Badges -->
   <div class="flex flex-col items-center">
     <!-- Top-Down Floating Pizza Visual (No border, clean circular food styling with drop shadow) -->
-    <div class="relative mb-4 h-40 w-40 sm:h-44 sm:w-44 flex items-center justify-center">
+    <div class="relative mb-3 sm:mb-4 h-32 w-32 sm:h-44 sm:w-44 flex items-center justify-center">
       <!-- Soft ambient warmth glow -->
       <div class="absolute inset-2 rounded-full bg-forno-arancio/10 blur-xl transition-all duration-500 group-hover:scale-125 group-hover:bg-forno-arancio/20"></div>
       
@@ -53,17 +52,21 @@ const serializedData = JSON.stringify({
         loading="lazy"
       />
 
-      <!-- Quick View Badge on Hover -->
-      <div class="absolute inset-0 flex items-center justify-center rounded-full bg-carbone/40 opacity-0 backdrop-blur-[2px] transition duration-300 group-hover:opacity-100">
+      <!-- Touch hint — subtle chip on mobile, hover overlay on desktop -->
+      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1 sm:hidden">
+        <span class="rounded-full bg-white/95 px-2 py-0.5 text-[10px] font-semibold text-carbone shadow-sm ring-1 ring-crema-forno">
+          Dettagli
+        </span>
+      </div>
+      <div class="absolute inset-0 hidden sm:flex items-center justify-center rounded-full bg-carbone/40 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition duration-300">
         <span class="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-carbone shadow-md backdrop-blur-sm">
-          Scopri 🔍
+          Scopri
         </span>
       </div>
     </div>
 
     <!-- Tags / Badges -->
     <div class="flex flex-wrap justify-center gap-1.5 mb-2">
-      <GlutenFreeBadge />
       {item.featured && (
         <span class="rounded-full bg-basilico/10 px-2.5 py-0.5 text-[11px] font-bold text-basilico">
           ★ Consigliato
@@ -82,7 +85,7 @@ const serializedData = JSON.stringify({
     </div>
 
     <!-- Title & Description -->
-    <h3 class="text-center font-display text-xl font-bold text-carbone transition-colors group-hover:text-pomodoro">
+    <h3 class="text-center font-display text-lg sm:text-xl font-bold text-carbone transition-colors group-hover:text-pomodoro">
       {item.name}
     </h3>
     <p class="mt-2 text-center text-xs leading-relaxed text-grigio-caldo line-clamp-2">
@@ -91,7 +94,7 @@ const serializedData = JSON.stringify({
   </div>
 
   <!-- Bottom Section: Price & CTA Action -->
-  <div class="mt-5 flex items-center justify-between border-t border-crema-forno/60 pt-3">
+  <div class="mt-4 sm:mt-5 flex items-center justify-between border-t border-crema-forno/60 pt-3">
     <div class="flex flex-col">
       <span class="text-[10px] uppercase tracking-wider text-grigio-caldo">Prezzo</span>
       <span class="font-display text-lg font-bold tabular-nums text-pomodoro">

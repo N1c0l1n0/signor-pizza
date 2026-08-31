@@ -75,19 +75,19 @@ const isHome = currentPath === '/';
 
   <nav
     id="mobile-nav"
-    class="hidden border-t border-crema-forno bg-bianco-caldo px-4 py-4 lg:hidden"
+    class="hidden max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain border-t border-crema-forno bg-bianco-caldo px-4 py-4 lg:hidden"
     aria-label="Navigazione mobile"
   >
     <ul class="flex flex-col gap-2">
       {navItems.map((item) => (
         <li>
-          <a href={item.href} class="block rounded-lg px-3 py-2 text-sm font-medium text-carbone hover:bg-crema-forno">
+          <a href={item.href} class="block rounded-lg px-3 py-3 text-sm font-medium text-carbone hover:bg-crema-forno active:bg-crema-forno touch-manipulation">
             {item.label}
           </a>
         </li>
       ))}
       <li>
-        <a href="/menu" class="block rounded-lg px-3 py-2 text-sm font-semibold text-pomodoro hover:bg-crema-forno">
+        <a href="/menu" class="block rounded-lg px-3 py-3 text-sm font-semibold text-pomodoro hover:bg-crema-forno active:bg-crema-forno touch-manipulation">
           Menu
         </a>
       </li>

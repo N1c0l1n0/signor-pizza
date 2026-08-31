@@ -1,8 +1,8 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "signor-pizza",
-  "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-08-31",
-  "build": {
-    "command": "npm run build"
+  "assets": {
+    "directory": "./dist"
   }
 }

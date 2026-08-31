@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import StickyBar from "../components/StickyBar.astro";
 import MenuCategory from "../components/MenuCategory.astro";
 import SectionHeading from "../components/SectionHeading.astro";
+import GlutenFreeBadge from "../components/GlutenFreeBadge.astro";
 import PizzaModal from "../components/PizzaModal.astro";
 import menu from "../data/menu.json";
 import site from "../data/site.json";
@@ -45,6 +46,33 @@ const totalPizzas = menu.categories.reduce(
         provenienza e i consigli di degustazione.
       </p>
 
+      <!-- Gluten-free highlight -->
+      <div
+        class="mt-6 mx-auto max-w-xl rounded-2xl border-2 border-basilico/30 bg-gradient-to-br from-basilico/10 via-basilico/5 to-transparent px-5 py-4 text-left shadow-sm"
+      >
+        <div class="flex items-start gap-3 sm:items-center">
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-basilico text-white shadow-md"
+            aria-hidden="true"
+          >
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </span>
+          <div>
+            <p class="font-display text-base font-bold text-basilico sm:text-lg">
+              Tutte le pizze disponibili senza glutine
+            </p>
+            <p class="mt-1 text-sm leading-relaxed text-grigio-caldo">
+              Impasto certificato AIC per celiaci — stessa qualità, stessa passione.
+            </p>
+            <div class="mt-2">
+              <GlutenFreeBadge size="md" />
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Search & Filters Container -->
       <div class="mt-8 mx-auto max-w-2xl">
         <!-- Search Input -->
@@ -79,47 +107,6 @@ const totalPizzas = menu.categories.reduce(
           </button>
         </div>
 
-        <!-- Quick Filter Tags -->
-        <div
-          class="mt-4 flex flex-wrap items-center justify-center gap-2"
-          id="filter-chips"
-        >
-          <button
-            type="button"
-            data-filter="all"
-            class="filter-chip active rounded-full px-4 py-1.5 text-xs font-semibold bg-pomodoro text-white transition shadow-sm"
-          >
-            Tutte
-          </button>
-          <button
-            type="button"
-            data-filter="regionali"
-            class="filter-chip rounded-full px-4 py-1.5 text-xs font-semibold bg-crema-forno text-carbone hover:bg-crema-forno/80 transition"
-          >
-            Regionali d'Italia
-          </button>
-          <button
-            type="button"
-            data-filter="tradizionali"
-            class="filter-chip rounded-full px-4 py-1.5 text-xs font-semibold bg-crema-forno text-carbone hover:bg-crema-forno/80 transition"
-          >
-            Tradizionali
-          </button>
-          <button
-            type="button"
-            data-filter="vegetariana"
-            class="filter-chip rounded-full px-4 py-1.5 text-xs font-semibold bg-crema-forno text-carbone hover:bg-crema-forno/80 transition"
-          >
-            🌱 Vegetariane
-          </button>
-          <button
-            type="button"
-            data-filter="speciale"
-            class="filter-chip rounded-full px-4 py-1.5 text-xs font-semibold bg-crema-forno text-carbone hover:bg-crema-forno/80 transition"
-          >
-            Speciale Chef
-          </button>
-        </div>
       </div>
     </div>
   </section>
@@ -139,7 +126,7 @@ const totalPizzas = menu.categories.reduce(
             <a
               href={`#${category.id}`}
               data-category={category.id}
-              class="menu-tab shrink-0 rounded-full border border-crema-forno px-4 py-1.5 text-sm font-semibold text-grigio-caldo transition hover:border-basilico hover:text-basilico"
+              class="menu-tab"
             >
               {category.name}
             </a>
@@ -152,6 +139,7 @@ const totalPizzas = menu.categories.reduce(
       >
         {totalPizzas} pizze disponibili
       </span>
+      <GlutenFreeBadge size="sm" class="hidden sm:inline-flex shrink-0" />
     </div>
   </nav>
 
@@ -202,9 +190,9 @@ const totalPizzas = menu.categories.reduce(
           const { id } = entry.target;
           tabs.forEach((tab) => {
             const active = tab.dataset.category === id;
-            tab.classList.toggle("bg-basilico", active);
-            tab.classList.toggle("border-basilico", active);
-            tab.classList.toggle("text-white", active);
+            tab.classList.toggle("is-active", active);
+            if (active) tab.setAttribute("aria-current", "true");
+            else tab.removeAttribute("aria-current");
           });
         }
       });
@@ -239,18 +227,16 @@ const totalPizzas = menu.categories.reduce(
     });
   });
 
-  // Live Search & Filter Logic
+  // Live Search Logic
   const searchInput = document.getElementById("pizza-search-input");
   const searchClearBtn = document.getElementById("search-clear-btn");
   const resetBtn = document.getElementById("reset-search-btn");
-  const filterChips = document.querySelectorAll(".filter-chip");
   const pizzaCards = document.querySelectorAll(".pizza-card");
   const noResults = document.getElementById("no-results-msg");
   const categorySections = document.querySelectorAll(".category-section");
   const resultsCounter = document.getElementById("active-results-counter");
 
   let currentQuery = "";
-  let currentFilter = "all";
 
   function applyFilter() {
     let visibleCount = 0;
@@ -258,10 +244,8 @@ const totalPizzas = menu.categories.reduce(
     pizzaCards.forEach((card) => {
       const name = card.getAttribute("data-name") || "";
       const desc = card.getAttribute("data-description") || "";
-      const cat = card.getAttribute("data-category") || "";
       const reg = card.getAttribute("data-region") || "";
       const tags = card.getAttribute("data-tags") || "";
-      const featured = card.getAttribute("data-featured") === "true";
 
       const matchesSearch =
         !currentQuery ||
@@ -270,25 +254,7 @@ const totalPizzas = menu.categories.reduce(
         reg.includes(currentQuery) ||
         tags.toLowerCase().includes(currentQuery);
 
-      let matchesTag = true;
-      if (currentFilter === "featured") matchesTag = featured;
-      else if (currentFilter === "tradizionali")
-        matchesTag = cat.includes("tradizionali");
-      else if (currentFilter === "regionali")
-        matchesTag = cat.includes("regionali");
-      else if (currentFilter === "speciale")
-        matchesTag = cat.includes("speciale");
-      else if (currentFilter === "vegetariana")
-        matchesTag =
-          tags.toLowerCase().includes("vegetariana") ||
-          tags.toLowerCase().includes("vegana") ||
-          (desc.includes("pomodoro") &&
-            !desc.includes("prosciutto") &&
-            !desc.includes("salsiccia") &&
-            !desc.includes("tonno") &&
-            !desc.includes("acciuga"));
-
-      const isVisible = matchesSearch && matchesTag;
+      const isVisible = matchesSearch;
       card.style.display = isVisible ? "" : "none";
       if (isVisible) visibleCount++;
     });
@@ -331,27 +297,6 @@ const totalPizzas = menu.categories.reduce(
   resetBtn?.addEventListener("click", () => {
     if (searchInput) searchInput.value = "";
     currentQuery = "";
-    currentFilter = "all";
-    filterChips.forEach((chip) => {
-      chip.classList.toggle("bg-pomodoro", chip.dataset.filter === "all");
-      chip.classList.toggle("text-white", chip.dataset.filter === "all");
-      chip.classList.toggle("bg-crema-forno", chip.dataset.filter !== "all");
-      chip.classList.toggle("text-carbone", chip.dataset.filter !== "all");
-    });
     applyFilter();
-  });
-
-  filterChips.forEach((chip) => {
-    chip.addEventListener("click", () => {
-      currentFilter = chip.dataset.filter || "all";
-      filterChips.forEach((c) => {
-        const active = c === chip;
-        c.classList.toggle("bg-pomodoro", active);
-        c.classList.toggle("text-white", active);
-        c.classList.toggle("bg-crema-forno", !active);
-        c.classList.toggle("text-carbone", !active);
-      });
-      applyFilter();
-    });
   });
 </script>

@@ -43,15 +43,17 @@
         <span id="modal-region-tag" class="mt-3 text-xs font-semibold uppercase tracking-widest text-basilico"></span>
       </div>
 
-      <!-- Content -->
-      <div class="sm:col-span-7 flex flex-col justify-between">
+      <!-- Content (pr-14 keeps text clear of the absolute close button) -->
+      <div class="sm:col-span-7 flex flex-col justify-between pr-14">
         <div>
-          <div class="flex items-center justify-between gap-2">
-            <span id="modal-category-tag" class="text-xs font-bold uppercase tracking-wider text-pomodoro"></span>
-            <span id="modal-price" class="text-2xl font-bold tabular-nums text-pomodoro"></span>
-          </div>
+          <span id="modal-category-tag" class="text-xs font-bold uppercase tracking-wider text-pomodoro"></span>
 
           <h3 id="modal-title" class="mt-1 font-display text-2xl sm:text-3xl font-semibold text-carbone"></h3>
+
+          <div class="mt-2 flex items-baseline gap-2">
+            <span class="text-[10px] font-semibold uppercase tracking-wider text-grigio-caldo">Prezzo</span>
+            <span id="modal-price" class="font-display text-2xl font-bold tabular-nums text-pomodoro"></span>
+          </div>
 
           <!-- Tags row -->
           <div id="modal-tags" class="mt-2 flex flex-wrap gap-1.5"></div>
@@ -78,14 +80,22 @@
           <p id="modal-pairing-note" class="text-xs text-grigio-caldo"></p>
         </div>
 
-        <!-- CTA footer note -->
-        <div class="mt-4 flex items-center justify-between text-xs text-grigio-caldo">
-          <span class="flex items-center gap-1">
-            <span class="inline-block h-2 w-2 rounded-full bg-basilico"></span>
-            Disponibile impasto AIC Gluten Free
+        <!-- Gluten-free callout -->
+        <div class="mt-4 flex items-start gap-3 rounded-2xl border border-basilico/25 bg-basilico/8 px-4 py-3">
+          <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-basilico text-white">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
           </span>
-          <span class="italic font-display">Signor Pizza • 2026</span>
+          <div>
+            <p class="text-sm font-bold text-basilico">Disponibile senza glutine</p>
+            <p class="mt-0.5 text-xs leading-relaxed text-grigio-caldo">
+              Impasto certificato AIC, preparato con attenzione dedicata per celiaci.
+            </p>
+          </div>
         </div>
+
+        <p class="mt-3 text-right text-xs italic text-grigio-caldo font-display">Signor Pizza · 2026</p>
       </div>
     </div>
   </div>
@@ -123,6 +133,10 @@
 
     if (modalTags) {
       modalTags.innerHTML = '';
+      const gfBadge = document.createElement('span');
+      gfBadge.className = 'inline-flex items-center gap-1 rounded-full bg-basilico/12 px-2.5 py-0.5 text-xs font-bold text-basilico ring-1 ring-basilico/25';
+      gfBadge.textContent = 'Senza glutine · AIC';
+      modalTags.appendChild(gfBadge);
       if (data.tags && Array.isArray(data.tags)) {
         data.tags.forEach((tag: string) => {
           const span = document.createElement('span');

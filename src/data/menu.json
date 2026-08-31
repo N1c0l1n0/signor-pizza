@@ -5,34 +5,11 @@
       "name": "Tradizionali",
       "items": [
         {
-          "name": "Marinara",
-          "description": "Doppio pomodoro S. Marzano, olio agliato, origano, basilico",
-          "price": 5,
-          "image": "marinara",
-          "tags": ["Classica", "Vegana"]
-        },
-        {
-          "name": "Margherita",
-          "description": "Pomodoro S. Marzano, mozzarella fior di latte, olio EVO, basilico",
-          "price": 6,
-          "featured": true,
-          "image": "margherita",
-          "tags": ["Iconica", "Vegetariana", "Best Seller"]
-        },
-        {
           "name": "Napoli",
           "description": "Pomodoro S. Marzano, mozzarella fior di latte, filetti di acciuga, basilico",
           "price": 7,
           "image": "napoli",
           "tags": ["Sapori di Mare"]
-        },
-        {
-          "name": "Bufalina",
-          "description": "Pomodoro S. Marzano, mozzarella di bufala campana D.O.P., olio EVO, basilico",
-          "price": 8,
-          "featured": true,
-          "image": "bufalina",
-          "tags": ["D.O.P.", "Vegetariana", "Consigliata"]
         },
         {
           "name": "Tonno e cipolle",
@@ -42,33 +19,11 @@
           "tags": ["Tropea IGP"]
         },
         {
-          "name": "Contadina",
-          "description": "Pomodoro S. Marzano, mozzarella fior di latte, melanzane, friggitelli, zucchine, olio EVO, olive Gaeta, basilico",
-          "price": 9,
-          "image": "contadina",
-          "tags": ["Ortaggi Freschi", "Vegetariana"]
-        },
-        {
-          "name": "Filante",
-          "description": "Mozzarella fior di latte, zola mascarpone, provola affumicata, grana padano D.O.P., basilico",
-          "price": 8.5,
-          "image": "filante",
-          "tags": ["4 Formaggi", "Vegetariana"]
-        },
-        {
           "name": "Salsiccia e friarielli",
           "description": "Mozzarella fior di latte, salsiccia, friarielli, olio EVO, basilico",
           "price": 9,
           "image": "salsiccia-e-friarielli",
           "tags": ["Tradizione Napoletana"]
-        },
-        {
-          "name": "Norma",
-          "description": "Pomodoro S. Marzano, mozzarella fior di latte, melanzane soffritte, pomodorini, ricotta salata, basilico",
-          "price": 10,
-          "featured": true,
-          "image": "norma",
-          "tags": ["Siciliana", "Vegetariana"]
         },
         {
           "name": "Calzone semplice",
@@ -220,15 +175,6 @@
           "tags": ["Piccante", "'Nduja"]
         },
         {
-          "name": "Sicilia",
-          "description": "Crema di pistacchi di Bronte, mozzarella fior di latte, pomodorini gialli, ricotta salata, granella di pistacchio",
-          "price": 10,
-          "featured": true,
-          "image": "sicilia",
-          "region": "Sicilia",
-          "tags": ["Pistacchio di Bronte", "Vegetariana"]
-        },
-        {
           "name": "Sardegna",
           "description": "Crema di carciofi, mozzarella fior di latte, ricotta sarda, pancetta pepiata",
           "price": 10,
@@ -248,6 +194,66 @@
           "featured": true,
           "image": "signor-pizza",
           "tags": ["Firma dello Chef", "Burrata & Crudo", "Must Try"]
+        }
+      ]
+    },
+    {
+      "id": "vegetariane",
+      "name": "Vegetariane",
+      "items": [
+        {
+          "name": "Marinara",
+          "description": "Doppio pomodoro S. Marzano, olio agliato, origano, basilico",
+          "price": 5,
+          "image": "marinara",
+          "tags": ["Classica", "Vegana"]
+        },
+        {
+          "name": "Margherita",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, olio EVO, basilico",
+          "price": 6,
+          "featured": true,
+          "image": "margherita",
+          "tags": ["Iconica", "Vegetariana", "Best Seller"]
+        },
+        {
+          "name": "Bufalina",
+          "description": "Pomodoro S. Marzano, mozzarella di bufala campana D.O.P., olio EVO, basilico",
+          "price": 8,
+          "featured": true,
+          "image": "bufalina",
+          "tags": ["D.O.P.", "Vegetariana", "Consigliata"]
+        },
+        {
+          "name": "Contadina",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, melanzane, friggitelli, zucchine, olio EVO, olive Gaeta, basilico",
+          "price": 9,
+          "image": "contadina",
+          "tags": ["Ortaggi Freschi", "Vegetariana"]
+        },
+        {
+          "name": "Filante",
+          "description": "Mozzarella fior di latte, zola mascarpone, provola affumicata, grana padano D.O.P., basilico",
+          "price": 8.5,
+          "image": "filante",
+          "tags": ["4 Formaggi", "Vegetariana"]
+        },
+        {
+          "name": "Norma",
+          "description": "Pomodoro S. Marzano, mozzarella fior di latte, melanzane soffritte, pomodorini, ricotta salata, basilico",
+          "price": 10,
+          "featured": true,
+          "image": "norma",
+          "tags": ["Siciliana", "Vegetariana"]
+        },
+        {
+          "name": "Sicilia",
+          "description": "Crema di pistacchi di Bronte, mozzarella fior di latte, pomodorini gialli, ricotta salata, granella di pistacchio",
+          "price": 10,
+          "featured": true,
+          "image": "sicilia",
+          "region": "Sicilia",
+          "tags": ["Pistacchio di Bronte", "Vegetariana"]
         }
       ]
     }

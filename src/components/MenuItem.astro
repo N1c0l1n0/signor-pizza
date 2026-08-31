@@ -1,4 +1,5 @@
 ---
+import GlutenFreeBadge from './GlutenFreeBadge.astro';
 import { formatPrice } from '../utils/format';
 import { getPizzaImage, getWineBeerPairing } from '../utils/pizzaImages';
 import type { MenuItem } from '../types/content';
@@ -62,6 +63,7 @@ const serializedData = JSON.stringify({
 
     <!-- Tags / Badges -->
     <div class="flex flex-wrap justify-center gap-1.5 mb-2">
+      <GlutenFreeBadge />
       {item.featured && (
         <span class="rounded-full bg-basilico/10 px-2.5 py-0.5 text-[11px] font-bold text-basilico">
           ★ Consigliato

@@ -79,6 +79,45 @@
   .reveal.is-visible {
     @apply translate-y-0 opacity-100;
   }
+
+  /* Filter chips: selected stays pomodoro even while hovered/focused */
+  .filter-chip {
+    @apply rounded-full px-4 py-1.5 text-xs font-semibold bg-crema-forno text-carbone shadow-none transition;
+  }
+
+  .filter-chip:hover:not(.is-active) {
+    background-color: color-mix(in srgb, var(--color-crema-forno) 88%, var(--color-carbone));
+    color: var(--color-carbone);
+  }
+
+  .filter-chip.is-active {
+    @apply bg-pomodoro text-white shadow-sm;
+  }
+
+  .filter-chip.is-active:hover,
+  .filter-chip.is-active:active,
+  .filter-chip.is-active:focus {
+    @apply bg-pomodoro-dark text-white;
+  }
+
+  /* Sticky category tabs: active green + white text must not revert on hover */
+  .menu-tab {
+    @apply shrink-0 rounded-full border border-crema-forno bg-transparent px-4 py-1.5 text-sm font-semibold text-grigio-caldo transition;
+  }
+
+  .menu-tab:hover:not(.is-active) {
+    @apply border-basilico text-basilico;
+  }
+
+  .menu-tab.is-active {
+    @apply border-basilico bg-basilico text-white;
+  }
+
+  .menu-tab.is-active:hover,
+  .menu-tab.is-active:active,
+  .menu-tab.is-active:focus {
+    @apply border-basilico bg-basilico text-white;
+  }
 }
 
 /* Unlayered so these beat Tailwind utilities on the same elements */

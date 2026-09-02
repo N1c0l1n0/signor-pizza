@@ -113,7 +113,7 @@ const totalPizzas = menu.categories.reduce(
   <!-- Sticky Categories Navigation -->
   <nav
     id="menu-tabs"
-    class="sticky top-[57px] sm:top-[65px] z-40 border-y border-crema-forno bg-bianco-caldo/95 backdrop-blur-md transition-shadow"
+    class="menu-tabs sticky z-40 border-y border-crema-forno bg-bianco-caldo/95 backdrop-blur-md transition-shadow"
     aria-label="Categorie menu"
   >
     <div
@@ -177,6 +177,19 @@ const totalPizzas = menu.categories.reduce(
 </BaseLayout>
 
 <script define:vars={{ categoryIds }}>
+  const menuTabs = document.getElementById("menu-tabs");
+
+  const setMenuTabsHeight = () => {
+    if (!menuTabs) return;
+    document.documentElement.style.setProperty(
+      "--menu-tabs-height",
+      `${menuTabs.offsetHeight}px`,
+    );
+  };
+
+  setMenuTabsHeight();
+  window.addEventListener("resize", setMenuTabsHeight, { passive: true });
+
   // ScrollSpy & Sticky Tabs
   const tabs = document.querySelectorAll(".menu-tab");
   const sections = categoryIds

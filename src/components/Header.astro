@@ -23,14 +23,18 @@ const isHome = currentPath === '/';
       : 'border-crema-forno/80 bg-bianco-caldo/90 backdrop-blur-md',
   ]}
 >
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-    <a href="/" class="flex items-center gap-3" aria-label={`${site.name} — Home`}>
+  <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6 lg:px-8">
+    <a href="/" class="flex shrink-0 items-center gap-3" aria-label={`${site.name} — Home`}>
       <img src="/images/logo.svg" alt="Signor Pizza" width="40" height="48" class="h-11 w-auto object-contain drop-shadow-sm transition-transform duration-200 hover:scale-105" />
       <div class="hidden sm:block">
         <p class="brand-title font-display text-lg font-semibold leading-tight text-carbone">{site.name}</p>
         <p class="brand-tag text-xs font-medium uppercase tracking-wider text-basilico">{site.tagline}</p>
       </div>
     </a>
+
+    <p class="brand-title pointer-events-none flex-1 truncate text-center font-display text-lg font-semibold leading-tight text-carbone sm:hidden">
+      Signor Pizza
+    </p>
 
     <nav class="hidden items-center gap-6 lg:flex" aria-label="Navigazione principale">
       {navItems.map((item) => (
@@ -62,49 +66,90 @@ const isHome = currentPath === '/';
     <button
       type="button"
       id="menu-toggle"
-      class="menu-toggle inline-flex h-10 w-10 items-center justify-center rounded-lg border border-crema-forno text-carbone lg:hidden"
+      class="menu-toggle relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-crema-forno text-carbone lg:hidden"
       aria-expanded="false"
       aria-controls="mobile-nav"
       aria-label="Apri menu di navigazione"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <span class="sr-only">Menu</span>
+      <svg class="menu-icon-open" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <svg class="menu-icon-close" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div
+  id="mobile-nav-backdrop"
+  class="mobile-nav-backdrop fixed inset-0 z-[55] bg-carbone/50 backdrop-blur-[3px] lg:hidden"
+  aria-hidden="true"
+  hidden
+></div>
+
+<nav
+  id="mobile-nav"
+  class="mobile-nav-drawer fixed inset-y-0 right-0 z-[60] flex w-[min(88vw,21rem)] flex-col border-l border-crema-forno bg-bianco-caldo shadow-[-8px_0_32px_rgb(26_26_26_/_0.12)] lg:hidden"
+  aria-label="Navigazione mobile"
+  aria-hidden="true"
+  hidden
+>
+  <div class="mobile-nav-header flex items-center gap-3 border-b border-crema-forno bg-crema-forno/40 px-5 py-4">
+    <img src="/images/logo.svg" alt="" width="32" height="38" class="h-9 w-auto shrink-0" aria-hidden="true" />
+    <div class="min-w-0 flex-1">
+      <p class="font-display text-lg font-semibold leading-tight text-carbone">Signor Pizza</p>
+      <p class="text-[11px] font-medium uppercase tracking-[0.14em] text-basilico">{site.tagline}</p>
+    </div>
+    <button
+      type="button"
+      id="menu-close"
+      class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-grigio-caldo transition hover:bg-crema-forno hover:text-carbone"
+      aria-label="Chiudi menu di navigazione"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"/>
       </svg>
     </button>
   </div>
 
-  <nav
-    id="mobile-nav"
-    class="hidden max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain border-t border-crema-forno bg-bianco-caldo px-4 py-4 lg:hidden"
-    aria-label="Navigazione mobile"
-  >
-    <ul class="flex flex-col gap-2">
-      {navItems.map((item) => (
-        <li>
-          <a href={item.href} class="block rounded-lg px-3 py-3 text-sm font-medium text-carbone hover:bg-crema-forno active:bg-crema-forno touch-manipulation">
-            {item.label}
-          </a>
-        </li>
-      ))}
-      <li>
-        <a href="/menu" class="block rounded-lg px-3 py-3 text-sm font-semibold text-pomodoro hover:bg-crema-forno active:bg-crema-forno touch-manipulation">
-          Menu
+  <ul class="mobile-nav-list flex flex-1 flex-col gap-0.5 overflow-y-auto overscroll-contain px-3 py-4">
+    {navItems.map((item, index) => (
+      <li class="mobile-nav-item" style={`--nav-delay: ${index * 40}ms`}>
+        <a href={item.href} class="mobile-nav-link">
+          {item.label}
         </a>
       </li>
-      <li class="pt-2">
-        <a href={site.bookingUrl} class="btn-primary w-full text-sm" target="_blank" rel="noopener noreferrer">
-          Prenota un tavolo
-        </a>
-      </li>
-    </ul>
-  </nav>
-</header>
+    ))}
+    <li class="mobile-nav-item" style={`--nav-delay: ${navItems.length * 40}ms`}>
+      <a href="/menu" class="mobile-nav-link mobile-nav-link-featured">
+        Menu
+      </a>
+    </li>
+    <li class="mobile-nav-item mt-auto px-1 pt-5" style={`--nav-delay: ${(navItems.length + 1) * 40}ms`}>
+      <a href={site.bookingUrl} class="btn-primary w-full text-sm" target="_blank" rel="noopener noreferrer">
+        Prenota un tavolo
+      </a>
+    </li>
+  </ul>
+</nav>
 
 <script>
   const header = document.getElementById('site-header');
   const toggle = document.getElementById('menu-toggle');
+  const closeBtn = document.getElementById('menu-close');
   const nav = document.getElementById('mobile-nav');
+  const backdrop = document.getElementById('mobile-nav-backdrop');
   const overHero = header?.classList.contains('header-over-hero');
+
+  const setHeaderHeight = () => {
+    if (!header) return;
+    document.documentElement.style.setProperty('--site-header-height', `${header.offsetHeight}px`);
+  };
+
+  setHeaderHeight();
+  window.addEventListener('resize', setHeaderHeight, { passive: true });
 
   const syncHeader = (navOpen = false) => {
     if (!header || !overHero) return;
@@ -114,23 +159,83 @@ const isHome = currentPath === '/';
   syncHeader();
   window.addEventListener(
     'scroll',
-    () => syncHeader(Boolean(nav && !nav.classList.contains('hidden'))),
+    () => syncHeader(Boolean(nav && nav.classList.contains('is-open'))),
     { passive: true }
   );
 
+  const setNavOpen = (open) => {
+    if (!nav || !backdrop || !toggle) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute(
+      'aria-label',
+      open ? 'Chiudi menu di navigazione' : 'Apri menu di navigazione'
+    );
+    nav.setAttribute('aria-hidden', String(!open));
+    backdrop.setAttribute('aria-hidden', String(!open));
+    toggle.classList.toggle('is-open', open);
+
+    if (open) {
+      nav.removeAttribute('hidden');
+      backdrop.removeAttribute('hidden');
+      document.body.classList.add('mobile-nav-open');
+
+      if (reducedMotion) {
+        nav.classList.add('is-open');
+        backdrop.classList.add('is-open');
+      } else {
+        requestAnimationFrame(() => {
+          nav.classList.add('is-open');
+          backdrop.classList.add('is-open');
+        });
+      }
+
+      closeBtn?.focus();
+    } else {
+      nav.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      document.body.classList.remove('mobile-nav-open');
+      toggle.focus();
+
+      const hidePanels = () => {
+        if (nav.classList.contains('is-open')) return;
+        nav.setAttribute('hidden', '');
+        backdrop.setAttribute('hidden', '');
+      };
+
+      if (reducedMotion) {
+        hidePanels();
+      } else {
+        const onCloseEnd = (event) => {
+          if (event.target !== nav || event.propertyName !== 'translate') return;
+          nav.removeEventListener('transitionend', onCloseEnd);
+          hidePanels();
+        };
+
+        nav.addEventListener('transitionend', onCloseEnd);
+        window.setTimeout(hidePanels, 360);
+      }
+    }
+
+    syncHeader(open);
+  };
+
   toggle?.addEventListener('click', () => {
-    const isOpen = nav?.classList.toggle('hidden') === false;
-    toggle.setAttribute('aria-expanded', String(isOpen));
-    toggle.setAttribute('aria-label', isOpen ? 'Chiudi menu di navigazione' : 'Apri menu di navigazione');
-    syncHeader(isOpen);
+    setNavOpen(!nav?.classList.contains('is-open'));
   });
 
-  nav?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      nav.classList.add('hidden');
-      toggle?.setAttribute('aria-expanded', 'false');
-      toggle?.setAttribute('aria-label', 'Apri menu di navigazione');
-      syncHeader(false);
-    });
+  closeBtn?.addEventListener('click', () => setNavOpen(false));
+  backdrop?.addEventListener('click', () => setNavOpen(false));
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && nav?.classList.contains('is-open')) {
+      setNavOpen(false);
+    }
+  });
+
+  nav?.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', () => setNavOpen(false));
   });
 </script>
